@@ -1,6 +1,7 @@
 package jpabook.jpashop;
 
 import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ class MemberRepositoryTest {
         member.setName("memberA");
 
         //when
-        Long savedId = memberRepository.save(member);
-        Member findMember = memberRepository.find(savedId);
+        memberRepository.save(member);
+        Member findMember = memberRepository.findOne(member.getId());
 
         //then
         Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
